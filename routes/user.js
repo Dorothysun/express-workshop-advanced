@@ -2,6 +2,7 @@ const express = require('express');
 var users = require('../userStorage.js');
 var router = express.Router();
 
+
 router.get('/', function (req, res, next) {
   console.log(req.query.minSalary);
   var alluser = users.getAllUsers();
@@ -34,10 +35,14 @@ router.get('/:name', function (req, res, next) {
 
 
 router.post('/', function(req, res, next){
+
   if (!req.body.name || !req.body.age || !req.body.salary ) {
-    console.log("missing");
+    console.log(req);
+    res.status(404).send("Sorry you screwed up");
+  }else{
+    console.log(req.body);
+    res.send(users.createUser(req.body.name,req.body.age,req.body.salary));
   }
-  res.end();
 });
 
 module.exports = router

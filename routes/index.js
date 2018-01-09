@@ -2,6 +2,10 @@
 var express = require('express');
 var router = express.Router();
 
+var body = require('body-parser');
+router.use(body.json());
+
+
 router.use('/users', require('./user.js'));
 router.use('/tweets', require('./tweet.js'));
 
