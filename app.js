@@ -1,7 +1,10 @@
 var express = require('express');
 var app = express();
 var chalk = require('chalk');
-// var routes = require('./routes'); uncomment this when you are ready to connect your router
+var routes = require('./routes'); //uncomment this when you are ready to connect your router
+
+
+app.use('/api', routes);
 
 app.get('/', function (req, res, next) {
   res.send('Root Route');
