@@ -7,11 +7,17 @@ router.get('/', function (req, res, next) {
   var alluser = users.getAllUsers();
   console.log(alluser)
   var minSalary = req.query.minSalary;
-  if(minSalary){
+  var maxAge = req.query.maxAge;
+  if (minSalary){
     alluser = alluser.filter(function (user) {
       return user.salary > minSalary
     });
     console.log(alluser);
+  }
+  if (maxAge) {
+    alluser = alluser.filter(function (user) {
+      return user.age <= maxAge;
+    })
   }
   res.send(alluser);
 });
@@ -24,6 +30,8 @@ router.get('/:name', function (req, res, next) {
   console.log(users.getUserByName(name));
   res.send(users.getUserByName(name));
 });
+
+
 
 router.post('/', function(req, res, next){
   if (!req.body.name || !req.body.age || !req.body.salary ) {
