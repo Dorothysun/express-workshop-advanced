@@ -35,14 +35,19 @@ router.get('/:name', function (req, res, next) {
 
 
 router.post('/', function(req, res, next){
+  var errorMessage = "Sorry you screwed up";
 
   if (!req.body.name || !req.body.age || !req.body.salary ) {
-    console.log(req);
-    res.status(404).send("Sorry you screwed up");
+    var err = new Error(errorMessage);
+    next(err);
   }else{
     console.log(req.body);
     res.send(users.createUser(req.body.name,req.body.age,req.body.salary));
   }
 });
 
+router.post('/', function (error, req, res, next) {
+  console.log("omg you look so good today 😍");
+  res.status(400).send("Bad request: not enough params");
+});
 module.exports = router
